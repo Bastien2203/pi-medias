@@ -12,7 +12,7 @@ This project is a self-hosted media explorer designed to run on a Raspberry Pi. 
 graph TD;
     A[Client] -->|Requests| B[API Service]
     B -->|Queries| C[MySQL Database]
-    B -->|Fetches| D[Filesystem (Nginx)]
+    B -->|Fetches| D[Filesystem]
     D -->|Serves Media| A
 ```
 
