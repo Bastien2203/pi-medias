@@ -1,0 +1,38 @@
+
+services:
+  api:
+    build: ./api
+    ports:
+      - "8080:8080"
+    volumes:
+      - media-data:/media
+    environment:
+      - MYSQL_HOST=mysql
+      - MYSQL_PORT=3306
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=example
+      - MYSQL_DATABASE=mediadb
+      - FS_BASE_URL=http://localhost:80/media
+    depends_on:
+      - mysql
+      - filesystem
+
+  mysql:
+    image: mysql:8
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: example
+      MYSQL_DATABASE: mediadb
+    volumes:
+      - mysql-data:/var/lib/mysql
+
+  filesystem:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+    volumes:
+      - media-data:/usr/share/nginx/html/media
+
+volumes:
+  media-data:
+  mysql-data:
