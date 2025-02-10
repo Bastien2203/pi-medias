@@ -6,7 +6,7 @@ services:
     volumes:
       - media-data:/media
     environment:
-      - MYSQL_HOST=mysql
+      - MYSQL_HOST=medias-mysql
       - MYSQL_PORT=3306
       - MYSQL_USER=root
       - MYSQL_PASSWORD=example
