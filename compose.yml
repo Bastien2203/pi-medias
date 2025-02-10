@@ -49,5 +49,7 @@ volumes:
 
 networks:
   medias-db:
+    driver: bridge
+    
   proxy-network:
     external: true
