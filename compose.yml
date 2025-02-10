@@ -33,7 +33,7 @@ services:
   medias-filesystem:
     image: nginx:alpine
     ports:
-      - "80:80"
+      - "8888:80"
     volumes:
       - media-data:/usr/share/nginx/html/media
     networks:
@@ -48,5 +48,6 @@ volumes:
 
 networks:
   medias-db:
+    driver: bridge
   proxy-network:
     external: true
