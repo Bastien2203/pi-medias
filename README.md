@@ -40,7 +40,7 @@ graph TD;
    
 2. Start the services:
    ```sh
-   docker compose up -d
+   docker compose --env-file .env up --build -d
    ```
 3. Access the API at `http://localhost:8080`.
 4. Access media files at `http://localhost/media`.

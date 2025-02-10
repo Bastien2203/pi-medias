@@ -1,6 +1,6 @@
 
 services:
-  api:
+  medias-api:
     build: ./api
     ports:
       - "8080:8080"
@@ -12,12 +12,14 @@ services:
       - MYSQL_USER=root
       - MYSQL_PASSWORD=example
       - MYSQL_DATABASE=mediadb
-      - FS_BASE_URL=http://localhost:80/media
+      - FS_BASE_URL="${FS_BASE_URL}"
     depends_on:
-      - mysql
-      - filesystem
+      - medias-mysql
+      - medias-filesystem
+    networks:
+      - proxy-network
 
-  mysql:
+  medias-mysql:
     image: mysql:8
     restart: always
     environment:
@@ -26,13 +28,21 @@ services:
     volumes:
       - mysql-data:/var/lib/mysql
 
-  filesystem:
+  medias-filesystem:
     image: nginx:alpine
     ports:
       - "80:80"
     volumes:
       - media-data:/usr/share/nginx/html/media
+    networks:
+      - proxy-network
 
 volumes:
   media-data:
   mysql-data:
+
+
+
+networks:
+  proxy-network:
+    external: true
