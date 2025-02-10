@@ -33,7 +33,7 @@ services:
   medias-filesystem:
     image: nginx:alpine
     ports:
-      - "8888:80"
+      - "80:8888"
     volumes:
       - media-data:/usr/share/nginx/html/media
     networks:
